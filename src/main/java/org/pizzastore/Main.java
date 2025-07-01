@@ -38,7 +38,41 @@ public class Main {
         menuService.displayMenu();
     }
 
-    
+    private static void showOrderView() {
+        List<Pizza> selectedPizzas = new ArrayList<>();
+        
+        // First item selection
+        Pizza firstPizza = selectItem("You can buy 3 items.\nPlease select first item you want to buy.", 
+                                     "Press item number to select first item\nOR\nPress [0] to go back to Main menu");
+        if (firstPizza == null) return; 
+        selectedPizzas.add(firstPizza);
+        
+        // Second item selection
+        Pizza secondPizza = selectItem("Please select second item you want to buy.", 
+                                      "Press item number to select as second item\nOR\nPress [E] to complete\nOR\nPress [0] to go back to Main menu");
+        if (secondPizza == null) {
+            // Check if user wants to complete order or go back
+            return;
+        }
+        if (secondPizza != Pizza.COMPLETE_ORDER) {
+            selectedPizzas.add(secondPizza);
+        } else {
+            showReceipt(selectedPizzas);
+            return;
+        }
+        
+        // Third item selection
+        Pizza thirdPizza = selectItem("Please select final item you want to buy.", 
+                                     "Press item number to select as third item\nOR\nPress [E] to complete\nOR\nPress [0] to go back to Main menu");
+        if (thirdPizza == null) {
+            return; 
+        }
+        if (thirdPizza != Pizza.COMPLETE_ORDER) {
+            selectedPizzas.add(thirdPizza);
+        }
+        
+        showReceipt(selectedPizzas);
+    }
 
     private static Pizza selectItem(String message, String instruction) {
         while (true) {
