@@ -72,5 +72,25 @@ public class Main {
         }
     }
     
+    private static void showReceipt(List<Pizza> selectedPizzas) {
+        double total = selectedPizzas.stream().mapToDouble(Pizza::getPrice).sum();
+        
+        System.out.println("You have ordered #" + selectedPizzas.size() + " number of items");
+        System.out.println("            Pizza Hut");
+        System.out.println("-------------------------------------");
+        
+        for (Pizza pizza : selectedPizzas) {
+            System.out.println(pizza);
+        }
+        
+        System.out.println();
+        System.out.println("        Total : " + String.format("%.2f LKR", total));
+        System.out.println("-------------------------------------");
+        System.out.println("     Thank You For Ordering");
+        System.out.println("-------------------------------------");
+        System.out.println("Thank you for visiting Pizza Hut, See you next time");
+        
+        System.exit(0); 
+    }
 
 }
