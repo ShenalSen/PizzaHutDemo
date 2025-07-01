@@ -7,6 +7,38 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final MenuService menuService = new MenuService();
 
+        public static void main(String[] args) {
+        showHomeView();
+    }
+    
+    private static void showHomeView() {
+        while (true) {
+            System.out.println("Welcome to PizzaHut!");
+            System.out.println("To View our menu, press [1]");
+            System.out.println("To place an Order, press [2]");
+            System.out.println("Press [x] to exit the store");
+            
+            String input = scanner.nextLine().trim().toLowerCase();
+            
+            switch (input) {
+                case "1":
+                    showMainMenuView();
+                    break;
+                case "2":
+                    showOrderView();
+                    break;
+                case "x":
+                    System.out.println("Thank you for visiting Pizza Hut, See you next time");
+                    return;
+                default:
+                    System.out.println("Please enter valid option from bellow");
+                    System.out.println("To View our menu, press [1]");
+                    System.out.println("To place an Order, press [2]");
+                    System.out.println();
+            }
+        }
+    }
+    
     private static void showMainMenuView() {
         while (true) {
             menuService.displayMenu();
@@ -32,12 +64,12 @@ public class Main {
             }
         }
     }
-
+    
     private static void showInvalidMenuInput() {
         System.out.println("Please enter a valid input");
         menuService.displayMenu();
     }
-
+    
     private static void showOrderView() {
         List<Pizza> selectedPizzas = new ArrayList<>();
         
@@ -73,7 +105,7 @@ public class Main {
         
         showReceipt(selectedPizzas);
     }
-
+    
     private static Pizza selectItem(String message, String instruction) {
         while (true) {
             menuService.displayMenuForOrder(message);
