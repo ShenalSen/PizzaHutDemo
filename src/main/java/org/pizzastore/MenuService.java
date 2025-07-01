@@ -41,5 +41,18 @@ public class MenuService {
                 .orElse(null);
     }
 
+    public void displayMenu() {
+        System.out.println("PizzaHut Menu");
+        System.out.println();
+        for (Pizza pizza : pizzas) {
+            System.out.println(pizza);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println("Press item number to view description");
+        System.out.println("OR");
+        System.out.println("Press [0] to go back");
+    }
+
     
 }
