@@ -37,6 +37,40 @@ public class Main {
         System.out.println("Please enter a valid input");
         menuService.displayMenu();
     }
+
+    
+
+    private static Pizza selectItem(String message, String instruction) {
+        while (true) {
+            menuService.displayMenuForOrder(message);
+            System.out.println(instruction);
+            
+            String input = scanner.nextLine().trim().toLowerCase();
+            
+            if (input.equals("0")) {
+                return null; 
+            }
+            
+            if (input.equals("e")) {
+                return Pizza.COMPLETE_ORDER; 
+            }
+            
+            try {
+                int choice = Integer.parseInt(input);
+                Pizza selectedPizza = menuService.getPizzaById(choice);
+                
+                if (selectedPizza != null) {
+                    return selectedPizza;
+                } else {
+                    System.out.println("Please enter a valid item number");
+                    System.out.println();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid input");
+                System.out.println();
+            }
+        }
+    }
     
 
 }
