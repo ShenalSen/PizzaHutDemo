@@ -54,5 +54,13 @@ public class MenuService {
         System.out.println("Press [0] to go back");
     }
 
+    public void displayPizzaDetails(Pizza pizza) {
+        System.out.println("Name        : " + pizza.getName());
+        System.out.println("Description : " + pizza.getDescription());
+        System.out.println("Price       : " + String.format("%.2f LKR", pizza.getPrice()));
+        System.out.println();
+        System.out.println("Press any to go back");
+    }
+
     
 }
