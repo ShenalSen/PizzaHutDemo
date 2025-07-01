@@ -30,4 +30,16 @@ public class MenuService {
         }
     }
 
+    public List<Pizza> getAllPizzas() {
+        return pizzas;
+    }
+
+    public Pizza getPizzaById(int id) {
+        return pizzas.stream()
+                .filter(pizza -> pizza.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    
 }
