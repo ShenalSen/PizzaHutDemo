@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "BBQ Chicken Pizza",
+    "description": "BBQ Chicken brest, Mozzarella Cheese, Bell Pepper",
+    "price": 1299.00
+  },
+  {
+    "id": 2,
+    "name": "Devil Chicken Pizza",
+    "description": "Spicy chicken, Hot sauce, Mozzarella Cheese, Onions",
+    "price": 1499.00
+  },
+  {
+    "id": 3,
+    "name": "Vegi Pizza",
+    "description": "Fresh vegetables, Mozzarella Cheese, Tomato sauce",
+    "price": 999.00
+  },
+  {
+    "id": 4,
+    "name": "Pork Pizza",
+    "description": "Premium pork, Mozzarella Cheese, Mushrooms",
+    "price": 1999.00
+  }
+]
