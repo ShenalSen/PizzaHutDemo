@@ -62,5 +62,13 @@ public class MenuService {
         System.out.println("Press any to go back");
     }
 
-    
+    public void displayMenuForOrder(String message) {
+        System.out.println(message);
+        System.out.println();
+        for (Pizza pizza : pizzas) {
+            System.out.println(pizza);
+        }
+        System.out.println();
+        System.out.println();
+    }
 }
