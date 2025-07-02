@@ -1,22 +1,23 @@
 package org.pizzastore;
 
+import java.util.Map;
+
 public class Pizza {
-    public static final Pizza COMPLETE_ORDER = new Pizza(-1, "COMPLETE", "Complete Order", 0);
+    public static final Pizza COMPLETE_ORDER = new Pizza(-1, "COMPLETE", "Complete Order", Map.of());
 
     private int id;
     private String name;
     private String description;
-    private double price;
+    private Map<String, Double> sizes;
 
     public Pizza() {}
 
-    public Pizza(int id, String name, String description, double price) {
+    public Pizza(int id, String name, String description, Map<String, Double> sizes) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.sizes = sizes;
     }
-
 
     public int getId() {
         return id;
@@ -42,16 +43,45 @@ public class Pizza {
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
+    public Map<String, Double> getSizes() {
+        return sizes;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setSizes(Map<String, Double> sizes) {
+        this.sizes = sizes;
+    }
+
+    public double getPriceBySize(String size) {
+        return sizes.getOrDefault(size.toUpperCase(), 0.0);
+    }
+
+    public boolean isValidSize(String size) {
+        return sizes.containsKey(size.toUpperCase());
     }
 
     @Override
     public String toString() {
-        return String.format("#%d %s - %.2f LKR", id, name, price);
+        if (sizes == null || sizes.isEmpty()) {
+            return String.format("#%d %s", id, name);
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("#%d %s - ", id, name));
+        
+        
+        String[] sizeOrder = {"L", "M", "S"};
+        boolean first = true;
+        
+        for (String size : sizeOrder) {
+            if (sizes.containsKey(size)) {
+                if (!first) {
+                    sb.append(" | ");
+                }
+                sb.append(String.format("%s %.2f LKR", size, sizes.get(size)));
+                first = false;
+            }
+        }
+        
+        return sb.toString();
     }
 }
