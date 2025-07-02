@@ -18,6 +18,7 @@ public class Main {
     
     private static void showHomeView() {
         while (true) {
+            System.out.println();
             System.out.println("To View our menu, press [1]");
             System.out.println("To place an Order, press [2]");
             System.out.print("Press [x] to exit the store :");
@@ -76,42 +77,41 @@ public class Main {
     }
     
     private static void showOrderView() {
-        List<Pizza> selectedPizzas = new ArrayList<>();
+        List<PizzaOrder> selectedOrders = new ArrayList<>();
         
         // First item selection
-        Pizza firstPizza = selectItem("You can buy 3 items.\nPlease select first item you want to buy.", 
-                                     "Press item number to select first item\nOR\nPress [0] to go back to Main menu");
-        if (firstPizza == null) return; 
-        selectedPizzas.add(firstPizza);
+        PizzaOrder firstOrder = selectItemWithSize("You can buy 3 items.\nPlease select first item you want to buy.", 
+                                                   "Press item number to select first item\nOR\nPress [0] to go back to Main menu");
+        if (firstOrder == null) return; 
+        selectedOrders.add(firstOrder);
         
         // Second item selection
-        Pizza secondPizza = selectItem("Please select second item you want to buy.", 
-                                      "Press item number to select as second item\nOR\nPress [E] to complete\nOR\nPress [0] to go back to Main menu");
-        if (secondPizza == null) {
-            // Check if user wants to complete order or go back
+        PizzaOrder secondOrder = selectItemWithSize("Please select second item you want to buy.", 
+                                                    "Press item number to select as second item\nOR\nPress [E] to complete\nOR\nPress [0] to go back to Main menu");
+        if (secondOrder == null) {
             return;
         }
-        if (secondPizza != Pizza.COMPLETE_ORDER) {
-            selectedPizzas.add(secondPizza);
+        if (secondOrder.getPizza() != Pizza.COMPLETE_ORDER) {
+            selectedOrders.add(secondOrder);
         } else {
-            showReceipt(selectedPizzas);
+            showReceipt(selectedOrders);
             return;
         }
         
         // Third item selection
-        Pizza thirdPizza = selectItem("Please select final item you want to buy.", 
-                                     "Press item number to select as third item\nOR\nPress [E] to complete\nOR\nPress [0] to go back to Main menu");
-        if (thirdPizza == null) {
+        PizzaOrder thirdOrder = selectItemWithSize("Please select final item you want to buy.", 
+                                                   "Press item number to select as third item\nOR\nPress [E] to complete\nOR\nPress [0] to go back to Main menu");
+        if (thirdOrder == null) {
             return; 
         }
-        if (thirdPizza != Pizza.COMPLETE_ORDER) {
-            selectedPizzas.add(thirdPizza);
+        if (thirdOrder.getPizza() != Pizza.COMPLETE_ORDER) {
+            selectedOrders.add(thirdOrder);
         }
         
-        showReceipt(selectedPizzas);
+        showReceipt(selectedOrders);
     }
     
-    private static Pizza selectItem(String message, String instruction) {
+    private static PizzaOrder selectItemWithSize(String message, String instruction) {
         while (true) {
             menuService.displayMenuForOrder(message);
             System.out.println(instruction);
@@ -123,7 +123,7 @@ public class Main {
             }
             
             if (input.equals("e")) {
-                return Pizza.COMPLETE_ORDER; 
+                return new PizzaOrder(Pizza.COMPLETE_ORDER, "");
             }
             
             try {
@@ -131,7 +131,8 @@ public class Main {
                 Pizza selectedPizza = menuService.getPizzaById(choice);
                 
                 if (selectedPizza != null) {
-                    return selectedPizza;
+                    // Now ask for size selection
+                    return selectSize(selectedPizza);
                 } else {
                     System.out.println("Please enter a valid item number");
                     System.out.println();
@@ -143,15 +144,39 @@ public class Main {
         }
     }
     
-    private static void showReceipt(List<Pizza> selectedPizzas) {
-        double total = selectedPizzas.stream().mapToDouble(Pizza::getPrice).sum();
+    private static PizzaOrder selectSize(Pizza pizza) {
+        while (true) {
+            System.out.println("You selected: " + pizza.getName());
+            System.out.println("Please select size:");
+            System.out.println("Press [L] for Large - " + String.format("%.2f LKR", pizza.getPriceBySize("L")));
+            System.out.println("Press [M] for Medium - " + String.format("%.2f LKR", pizza.getPriceBySize("M")));
+            System.out.println("Press [S] for Small - " + String.format("%.2f LKR", pizza.getPriceBySize("S")));
+            System.out.println("Press [0] to go back to pizza selection");
+            
+            String sizeInput = scanner.nextLine().trim().toUpperCase();
+            
+            if (sizeInput.equals("0")) {
+                return null; // Go back to pizza selection
+            }
+            
+            if (pizza.isValidSize(sizeInput)) {
+                return new PizzaOrder(pizza, sizeInput);
+            } else {
+                System.out.println("Please enter a valid size (L, M, or S)");
+                System.out.println();
+            }
+        }
+    }
+    
+    private static void showReceipt(List<PizzaOrder> selectedOrders) {
+        double total = selectedOrders.stream().mapToDouble(PizzaOrder::getPrice).sum();
         
-        System.out.println("You have ordered #" + selectedPizzas.size() + " number of items");
+        System.out.println("You have ordered #" + selectedOrders.size() + " number of items");
         System.out.println("            Pizza Hut");
         System.out.println("-------------------------------------");
         
-        for (Pizza pizza : selectedPizzas) {
-            System.out.println(pizza);
+        for (PizzaOrder order : selectedOrders) {
+            System.out.println(order);
         }
         
         System.out.println();
