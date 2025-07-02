@@ -8,12 +8,16 @@ public class Main {
     private static final MenuService menuService = new MenuService();
 
         public static void main(String[] args) {
+        System.out.println("""
+            ===================================
+             Welcome to PizzaHut App by Shenal!
+            ===================================
+            """);
         showHomeView();
     }
     
     private static void showHomeView() {
         while (true) {
-            System.out.println("Welcome to PizzaHut!");
             System.out.println("To View our menu, press [1]");
             System.out.println("To place an Order, press [2]");
             System.out.print("Press [x] to exit the store :");
