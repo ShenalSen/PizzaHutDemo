@@ -43,7 +43,6 @@ public class MenuService {
 
     public void displayMenu() {
         System.out.println("""
-            s
             -------------
             PizzaHut Menu
             -------------""");
@@ -60,7 +59,18 @@ public class MenuService {
     public void displayPizzaDetails(Pizza pizza) {
         System.out.println("Name        : " + pizza.getName());
         System.out.println("Description : " + pizza.getDescription());
-        System.out.println("Price       : " + String.format("%.2f LKR", pizza.getPrice()));
+        System.out.println("Sizes & Prices:");
+        
+        // Display sizes in L, M, S order
+        String[] sizeOrder = {"L", "M", "S"};
+        for (String size : sizeOrder) {
+            if (pizza.getSizes().containsKey(size)) {
+                String sizeDisplay = size.equals("L") ? "Large" : 
+                                   size.equals("M") ? "Medium" : "Small";
+                System.out.println("  " + sizeDisplay + " (" + size + ") : " + 
+                                 String.format("%.2f LKR", pizza.getPriceBySize(size)));
+            }
+        }
         System.out.println();
         System.out.println("Press any to go back");
     }
