@@ -35,9 +35,8 @@ public class Main {
                     System.out.println("Thank you for visiting Pizza Hut, See you next time");
                     return;
                 default:
+                    System.out.println();
                     System.out.println("Please enter valid option from bellow");
-                    System.out.println("To View our menu, press [1]");
-                    System.out.println("To place an Order, press [2]");
                     System.out.println();
                     break; 
             }
@@ -71,7 +70,9 @@ public class Main {
     }
     
     private static void showInvalidMenuInput() {
+        System.out.println();
         System.out.println("Please enter a valid input");
+        System.out.println();
     }
     
     private static void showOrderView() {
