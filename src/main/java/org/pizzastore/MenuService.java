@@ -61,7 +61,7 @@ public class MenuService {
         System.out.println("Description : " + pizza.getDescription());
         System.out.println("Sizes & Prices:");
         
-        // Display sizes in L, M, S order
+        // need to fix 12
         String[] sizeOrder = {"L", "M", "S"};
         for (String size : sizeOrder) {
             if (pizza.getSizes().containsKey(size)) {
@@ -75,6 +75,7 @@ public class MenuService {
         System.out.println("Press any to go back");
     }
 
+    // need to fix 10
     public void displayMenuForOrder(String message) {
         System.out.println(message);
         System.out.println();

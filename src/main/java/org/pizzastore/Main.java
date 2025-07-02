@@ -9,9 +9,9 @@ public class Main {
 
         public static void main(String[] args) {
         System.out.println("""
-            ===================================
-             Welcome to PizzaHut App by Shenal!
-            ===================================
+            ================================================================================
+             Welcome to PizzaHut App by Shenal! Now you can order pizzas in different sizes!
+            ================================================================================
             """);
         showHomeView();
     }
