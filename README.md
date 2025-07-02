@@ -57,10 +57,10 @@ The application simulates a real-world pizza ordering system where customers can
 
 ## 🛠 Built With
 
-- **Java 17+** - Core programming language
+- **Java 21** - Core programming language
 - **Gradle** - Build automation and dependency management
 - **Gson 2.10.1** - JSON parsing and serialization
-- **IntelliJ IDEA** - Recommended IDE
+- **IntelliJ IDEA** 
 
 ## 🚀 Getting Started
 
@@ -140,62 +140,12 @@ Press [x] to exit the store :
 #### **Exiting** (Press `x`)
 - Safe application termination with farewell message
 
-## 📁 Project Structure
-
-```
-PizzaHutDemo/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── org/
-│   │   │       └── pizzastore/
-│   │   │           ├── Main.java          # Main application entry point
-│   │   │           ├── Pizza.java         # Pizza data model
-│   │   │           └── MenuService.java   # Menu management service
-│   │   └── resources/
-│   │       └── menuList.json             # Pizza menu configuration
-│   └── test/
-│       └── java/                         # Test files (future expansion)
-├── build.gradle                          # Gradle build configuration
-├── gradlew                               # Gradle wrapper (Unix)
-├── gradlew.bat                           # Gradle wrapper (Windows)
-└── README.md                             # Project documentation
-```
-
 ### Key Components
 
 - **`Main.java`**: Application entry point and user interface logic
 - **`Pizza.java`**: Data model representing pizza items with encapsulation
 - **`MenuService.java`**: Service layer for menu operations and JSON data loading
 - **`menuList.json`**: External configuration file containing pizza menu data
-
-## ⚙️ Configuration
-
-### Menu Customization
-
-The pizza menu can be easily customized by editing `src/main/resources/menuList.json`:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "BBQ Chicken Pizza",
-    "description": "BBQ Chicken breast, Mozzarella Cheese, Bell Pepper",
-    "price": 1299.00
-  }
-]
-```
-
-### Adding New Dependencies
-
-To add new dependencies, update the `build.gradle` file:
-
-```gradle
-dependencies {
-    implementation 'com.google.code.gson:gson:2.10.1'
-    // Add your dependencies here
-}
-```
 
 ## 🤝 Contributing
 
@@ -231,21 +181,4 @@ Contributions are welcome! Here's how you can help improve this project:
 - Ensure proper error handling
 - Write descriptive commit messages
 
-### Potential Enhancements
-
-- [ ] Add unit tests with JUnit
-- [ ] Implement pizza customization options
-- [ ] Add order history functionality
-- [ ] Integrate with database storage
-- [ ] Add GUI interface option
-- [ ] Implement discount and promotion system
-
-## 📞 Contact
-
-**Shenal** - Java Training Program Participant
-
-Project Link: [https://github.com/yourusername/PizzaHutDemo](https://github.com/yourusername/PizzaHutDemo)
-
----
-
-*This project is part of the Java Training Program - Task 1*
+This is a coding project done by me (ShenalSen) under ActVue©
