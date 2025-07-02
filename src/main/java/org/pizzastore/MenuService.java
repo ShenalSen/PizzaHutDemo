@@ -42,8 +42,11 @@ public class MenuService {
     }
 
     public void displayMenu() {
-        System.out.println("PizzaHut Menu");
-        System.out.println();
+        System.out.println("""
+            s
+            -------------
+            PizzaHut Menu
+            -------------""");
         for (Pizza pizza : pizzas) {
             System.out.println(pizza);
         }
