@@ -36,9 +36,7 @@ public class Main {
                     return;
                 default:
                     System.out.println("Please enter valid option from bellow");
-                    System.out.println("To View our menu, press [1]");
-                    System.out.println("To place an Order, press [2]");
-                    System.out.println();
+                    break; 
             }
         }
     }
@@ -71,7 +69,6 @@ public class Main {
     
     private static void showInvalidMenuInput() {
         System.out.println("Please enter a valid input");
-        menuService.displayMenu();
     }
     
     private static void showOrderView() {
