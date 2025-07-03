@@ -52,4 +52,13 @@ public class AddonService {
         System.out.println("OR");
         System.out.println("Press [0] to finish customization");
     }
+    
+    public void displayAddons() {
+        System.out.println("Available Addons:");
+        System.out.println("================");
+        for (Addon addon : addons) {
+            System.out.println(addon);
+        }
+        System.out.println();
+    }
 }
