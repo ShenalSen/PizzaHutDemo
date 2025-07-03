@@ -1,6 +1,6 @@
 # 🍕 Pizza Hut Demo - Command Line Ordering System
 
-A simple yet comprehensive command-line application for Pizza Hut ordering system built with Java and Gradle. This application demonstrates object-oriented programming principles, JSON data handling, and interactive user interface design.
+A comprehensive command-line application for Pizza Hut ordering system built with Java and Gradle. This application demonstrates object-oriented programming principles, JSON data handling, interactive user interface design, and advanced customization features including multiple pizza sizes and addon management with dynamic pricing.
 
 ## 📋 Table of Contents
 
@@ -36,31 +36,48 @@ The application simulates a real-world pizza ordering system where customers can
 - Graceful exit functionality
 
 ### 📖 **Menu Management**
-- Dynamic menu loading from JSON configuration
-- Detailed pizza information display (name, description, price)
-- Interactive menu navigation with input validation
+- Dynamic menu loading from JSON configuration (`menuList.json`)
+- Multiple pizza sizes support (Large, Medium, Small) with different pricing
+- Detailed pizza information display (name, description, size-specific prices)
+- Interactive menu navigation with comprehensive input validation
 
-### 🛒 **Ordering System**
-- Support for up to 3 pizza selections
+### 🛒 **Advanced Ordering System**
+- Support for up to 3 pizza selections per order
+- **Size Selection**: Choose from Large, Medium, or Small for each pizza
+- **Addon Customization**: Add multiple addons to each pizza
+  - Add Cheese (+100.00 LKR)
+  - Add Vegetable (+75.00 LKR)
+  - Add Prawns (+125.00 LKR)
+- **Dynamic Pricing**: Real-time price calculation including base pizza + addons
 - Flexible ordering process (can complete order at any stage)
 - Real-time order management and validation
 
-### 🧾 **Receipt Generation**
-- Professional receipt formatting
-- Automatic total calculation
-- Order summary with itemized details
+### 🧾 **Professional Receipt Generation**
+- Detailed receipt formatting with itemized breakdown
+- Shows base pizza price by size
+- Lists all selected addons with individual prices
+- Automatic total calculation for each pizza and overall order
+- Professional formatting with clear order summary
 
-### 🛡️ **Error Handling**
-- Comprehensive input validation
-- User-friendly error messages
-- Graceful fallback mechanisms
+### 🛡️ **Robust Error Handling**
+- Comprehensive input validation at every step
+- User-friendly error messages with clear guidance
+- Graceful fallback mechanisms for invalid inputs
+- Safe navigation between different menu levels
+
+### 🎨 **Enhanced User Experience**
+- Clean, formatted CLI interface
+- Intuitive navigation with clear instructions
+- Option to go back at any step
+- Continuous addon selection until user is satisfied
+- Real-time feedback on selections and pricing
 
 ## 🛠 Built With
 
 - **Java 21** - Core programming language
 - **Gradle** - Build automation and dependency management
 - **Gson 2.10.1** - JSON parsing and serialization
-- **IntelliJ IDEA** 
+- **IntelliJ IDEA** - Development environment
 
 ## 🚀 Getting Started
 
@@ -115,9 +132,9 @@ Before running this application, ensure you have the following installed:
 Launch the application using the run command above. You'll be greeted with:
 
 ```
-===================================
- Welcome to PizzaHut App by Shenal!
-===================================
+================================================================================
+ Welcome to PizzaHut App by Shenal! Now you can order pizzas in different sizes!
+================================================================================
 
 To View our menu, press [1]
 To place an Order, press [2]
@@ -127,15 +144,43 @@ Press [x] to exit the store :
 ### Navigation Guide
 
 #### **Menu Viewing** (Press `1`)
-- Browse all available pizzas with prices
+- Browse all available pizzas with prices for all sizes (Large, Medium, Small)
 - Select any pizza number to view detailed information
 - Press `0` to return to the main menu
 
 #### **Placing Orders** (Press `2`)
+The ordering process includes these steps for each pizza:
+
+1. **Pizza Selection**: Choose from the available pizzas
+2. **Size Selection**: Choose Large, Medium, or Small
+3. **Addon Customization**: Add optional addons like cheese, vegetables, or prawns
+4. **Order Continuation**: Add up to 3 pizzas total
+
+**Order Options:**
 - Select up to 3 pizzas for your order
 - Press `E` to complete order early (after selecting at least 1 pizza)
 - Press `0` at any time to return to the main menu
+- Press `N` to skip addons for any pizza
 - Automatic receipt generation upon order completion
+
+**Sample Order Flow:**
+```
+You selected: Margherita
+Please select size:
+Press [L] for Large - 1500.00 LKR
+Press [M] for Medium - 1200.00 LKR
+Press [S] for Small - 900.00 LKR
+
+Would you like to add any addons to your Margherita (Large)?
+Available Addons:
+================
+#1 Add Cheese - 100.00 LKR
+#2 Add Vegetable - 75.00 LKR
+#3 Add Prawns - 125.00 LKR
+
+Press addon number to add it to your pizza
+Press [N] to skip addons and continue
+```
 
 #### **Exiting** (Press `x`)
 - Safe application termination with farewell message
@@ -146,6 +191,15 @@ Press [x] to exit the store :
 - **`Pizza.java`**: Data model representing pizza items with encapsulation
 - **`MenuService.java`**: Service layer for menu operations and JSON data loading
 - **`menuList.json`**: External configuration file containing pizza menu data
+
+### Architecture Overview
+
+The application follows a clean architecture pattern with clear separation of concerns:
+
+- **Model Layer**: `Pizza.java`, `Addon.java`, `PizzaOrder.java` - Data models with encapsulation
+- **Service Layer**: `MenuService.java`, `AddonService.java` - Business logic and data operations
+- **Presentation Layer**: `Main.java` - User interface and interaction handling
+- **Configuration**: JSON files for external data management
 
 ## 🤝 Contributing
 
@@ -173,12 +227,6 @@ Contributions are welcome! Here's how you can help improve this project:
    ```
 7. **Open a Pull Request**
 
-### Coding Standards
 
-- Follow Java naming conventions
-- Maintain consistent indentation (4 spaces)
-- Add comments for complex logic
-- Ensure proper error handling
-- Write descriptive commit messages
 
 This is a coding project done by me (ShenalSen) under ActVue©
