@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final MenuService menuService = new MenuService();
+    private static final AddonService addonService = new AddonService();
 
         public static void main(String[] args) {
         System.out.println("""
@@ -160,9 +161,52 @@ public class Main {
             }
             
             if (pizza.isValidSize(sizeInput)) {
-                return new PizzaOrder(pizza, sizeInput);
+                PizzaOrder order = new PizzaOrder(pizza, sizeInput);
+                // Now ask for addon selection
+                selectAddons(order);
+                return order;
             } else {
                 System.out.println("Please enter a valid size (L, M, or S)");
+                System.out.println();
+            }
+        }
+    }
+    
+    private static void selectAddons(PizzaOrder order) {
+        while (true) {
+            System.out.println();
+            System.out.println("Would you like to add any addons to your " + order.getPizza().getName() + " (" + order.getSizeDisplayName() + ")?");
+            addonService.displayAddons();
+            System.out.println("Press addon number to add it to your pizza");
+            System.out.println("Press [N] to skip addons and continue");
+            System.out.println("Press [0] to go back to size selection");
+            
+            String input = scanner.nextLine().trim().toLowerCase();
+            
+            if (input.equals("n")) {
+                break; // Continue without adding addons
+            }
+            
+            if (input.equals("0")) {
+                return; // This will be handled by the caller
+            }
+            
+            try {
+                int addonChoice = Integer.parseInt(input);
+                Addon selectedAddon = addonService.getAddonById(addonChoice);
+                
+                if (selectedAddon != null) {
+                    order.addAddon(selectedAddon);
+                    System.out.println("Added " + selectedAddon.getName() + " to your pizza! (+"+String.format("%.2f LKR", selectedAddon.getPrice())+")");
+                    System.out.println("Current pizza total: " + String.format("%.2f LKR", order.getPrice()));
+                    System.out.println();
+                    System.out.println("Would you like to add another addon?");
+                } else {
+                    System.out.println("Please enter a valid addon number");
+                    System.out.println();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid input");
                 System.out.println();
             }
         }
