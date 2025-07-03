@@ -30,5 +30,26 @@ public class AddonService {
         }
     }
 
-    
+    public List<Addon> getAllAddons() {
+        return addons;
+    }
+
+    public Addon getAddonById(int id) {
+        return addons.stream()
+                .filter(addon -> addon.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void displayAddonMenu(String message) {
+        System.out.println(message);
+        System.out.println();
+        for (Addon addon : addons) {
+            System.out.println(addon);
+        }
+        System.out.println();
+        System.out.println("Press relevant number to add the addon");
+        System.out.println("OR");
+        System.out.println("Press [0] to finish customization");
+    }
 }
