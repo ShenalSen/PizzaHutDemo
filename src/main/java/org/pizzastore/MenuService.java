@@ -17,7 +17,7 @@ public class MenuService {
 
     private void loadMenu() {
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("menuList.json");
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pizzaMenuList.json");
             if (inputStream == null) {
                 throw new RuntimeException("Could not find menuList.json");
             }

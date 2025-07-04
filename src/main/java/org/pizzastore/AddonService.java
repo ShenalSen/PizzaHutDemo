@@ -17,7 +17,7 @@ public class AddonService {
 
     private void loadAddons() {
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pizzaAddon.json");
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pizzaAddons.json");
             if (inputStream == null) {
                 throw new RuntimeException("Could not find pizzaAddon.json");
             }
