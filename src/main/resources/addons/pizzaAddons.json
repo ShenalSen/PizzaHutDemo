@@ -1,0 +1,20 @@
+{
+  "pizzaAddons": [
+    {
+      "name": "Cheese",
+      "price": 100.0
+    },
+    {
+      "name": "Vegetable",
+      "price": 750.0
+    },
+    {
+      "name": "BBQ Chicken",
+      "price": 125.0
+    },
+    {
+      "name": "Prawns",
+      "price": 125.0
+    }
+  ]
+}

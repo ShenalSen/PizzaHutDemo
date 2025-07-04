@@ -1,0 +1,80 @@
+{
+  "pizzaItems": [
+    {
+      "name": "BBQ Chicken Pizza",
+      "large":{
+        "name" : "Large",
+        "code" : "L",
+        "price" : 1899.0
+      },
+      "medium": {
+        "name" : "Medium",
+        "code" : "M",
+        "price" : 1399.0
+      },
+      "small": {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 999.0
+      },
+      "description": "BBQ Chicken brest, Mozzarella Cheese, Bell Pepper"
+    },
+    {
+      "name": "Devil Chicken Pizza",
+      "large":{
+        "name" : "Large",
+        "code" : "L",
+        "price" : 1899.0
+      },
+      "medium": {
+        "name" : "Medium",
+        "code" : "M",
+        "price" : 1399.0
+      },
+      "small": {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 999.0
+      },
+      "description": "Devil Chicken brest, Mozzarella Cheese, Bell Pepper"
+    },
+    {
+      "name": "Vegi Pizza",
+      "large":{
+        "name" : "Large",
+        "code" : "L",
+        "price" : 1899.0
+      },
+      "medium": {
+        "name" : "Medium",
+        "code" : "M",
+        "price" : 1399.0
+      },
+      "small": {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 999.0
+      },
+      "description": "Carrot & onions, Mozzarella Cheese, Bell Pepper"
+    },
+    {
+      "name": "Pork Pizza",
+      "large":{
+        "name" : "Large",
+        "code" : "L",
+        "price" : 1899.0
+      },
+      "medium": {
+        "name" : "Medium",
+        "code" : "M",
+        "price" : 1399.0
+      },
+      "small": {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 999.0
+      },
+      "description": "BBQ Pork, Mozzarella Cheese, Bell Pepper"
+    }
+  ]
+}

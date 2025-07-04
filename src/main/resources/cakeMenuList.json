@@ -1,0 +1,72 @@
+{
+  "cakeItems": [
+    {
+      "name": "Cheese Cake",
+      "full":{
+        "name" : "Full",
+        "code" : "F",
+        "price" : 1899.0
+      },
+      "half":{
+        "name" : "Half",
+        "code" : "H",
+        "price" : 950.0
+      },
+      "slice":{
+        "name" : "Slice",
+        "code" : "S",
+        "price" : 250
+      },
+      "description": "Cheesecake is a dessert made with a soft fresh cheese, eggs, and sugar.."
+    },
+    {
+      "name": "Strawberry Cake",
+      "full":{
+        "name" : "Full",
+        "code" : "F",
+        "price" : 1500.0
+      },
+      "half": null,
+      "slice":{
+        "name" : "Slice",
+        "code" : "S",
+        "price" : 1000.0
+      },
+      "description": "Fresh strawberry cake made with real strawberries."
+    },
+    {
+      "name": "Chocolate Cake",
+      "full":{
+        "name" : "Full",
+        "code" : "F",
+        "price" : 2000.0
+      },
+      "half": null,
+      "slice":{
+        "name" : "Slice",
+        "code" : "S",
+        "price" : 1000.0
+      },
+      "description": "Chocolate cake is a cake flavored with melted chocolate."
+    },
+    {
+      "name": "Butter Cake",
+      "full":{
+        "name" : "Full",
+        "code" : "F",
+        "price" : 100.0
+      },
+      "half":{
+        "name" : "Half",
+        "code" : "H",
+        "price" : 75.0
+      },
+      "slice":{
+        "name" : "Slice",
+        "code" : "S",
+        "price" : 50.0
+      },
+      "description": "A butter cake is a cake in which one of the main ingredients is butter."
+    }
+  ]
+}

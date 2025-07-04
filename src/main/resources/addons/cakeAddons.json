@@ -1,0 +1,20 @@
+{
+  "cakeAddons": [
+    {
+      "name": "Icing Naming",
+      "price": 100.0
+    },
+    {
+      "name": "Honey Topping",
+      "price": 100.0
+    },
+    {
+      "name": "Candles",
+      "price": 50.0
+    },
+    {
+      "name": "Chocolate powder",
+      "price": 100.0
+    }
+  ]
+}

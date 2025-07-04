@@ -1,0 +1,16 @@
+{
+  "softDrinksAddons": [
+    {
+      "name": "Ice Cube",
+      "price": 10.0
+    },
+    {
+      "name": "Lemon Ring",
+      "price": 10.0
+    },
+    {
+      "name": "Umbrella",
+      "price": 25.0
+    }
+  ]
+}

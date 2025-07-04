@@ -1,0 +1,80 @@
+{
+  "softDrinksItems": [
+    {
+      "name": "Sprite",
+      "large": {
+        "name": "Large",
+        "code": "L",
+        "price": 200.0
+      },
+      "regular": {
+        "name": "Regular",
+        "code": "R",
+        "price": 150.0
+      },
+      "small": {
+        "name": "Small",
+        "code": "S",
+        "price": 100.0
+      },
+      "description": "Sprite is a clear, lemon-lime flavored soft drink created by the Coca-Cola Company."
+    },
+    {
+      "name": "Coca Cola",
+      "large": {
+        "name": "Large",
+        "code": "L",
+        "price": 200.0
+      },
+      "regular": {
+        "name": "Regular",
+        "code": "R",
+        "price": 150.0
+      },
+      "small": {
+        "name": "Small",
+        "code": "S",
+        "price": 100.0
+      },
+      "description": "Coca-Cola, or Coke, is a carbonated soft drink with a cola flavor manufactured by the Coca-Cola Company."
+    },
+    {
+      "name": "Fanta",
+      "large": {
+        "name": "Large",
+        "code": "L",
+        "price": 200.0
+      },
+      "regular": {
+        "name": "Regular",
+        "code": "M",
+        "price": 150.0
+      },
+      "small": {
+        "name": "Small",
+        "code": "S",
+        "price": 100.0
+      },
+      "description": "Fanta is an American-owned brand of fruit-flavored carbonated soft drink created by Coca-Cola"
+    },
+    {
+      "name": "Pepsi",
+      "large": {
+        "name": "Large",
+        "code": "L",
+        "price": 200.0
+      },
+      "regular": {
+        "name": "Regular",
+        "code": "R",
+        "price": 150.0
+      },
+      "small": {
+        "name": "Small",
+        "code": "S",
+        "price": 100.0
+      },
+      "description": "Pepsi is a carbonated soft drink with a cola flavor, manufactured by PepsiCo."
+    }
+  ]
+}

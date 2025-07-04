@@ -1,0 +1,68 @@
+{
+  "hotBeveragesItems": [
+    {
+      "name": "Cappuccino",
+      "large": {
+        "name" : "Large",
+        "code" : "L",
+        "price" : 350.0
+      },
+      "regular":  {
+        "name" : "Regular",
+        "code" : "R",
+        "price" : 250.0
+      },
+      "small":  {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 75.0
+      },
+      "description": "Cappuccino is an espresso-based coffee drink that is traditionally prepared with steamed milk including a layer of milk foam."
+    },
+    {
+      "name": "Latte",
+      "large": {
+        "name" : "Large",
+        "code" : "L",
+        "price" : 250.0
+      },
+      "regular": null,
+      "small":  {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 100.0
+      },
+      "description": "Caffè latte, often shortened to just latte in English."
+    },
+    {
+      "name": "Nescafe",
+      "large":{
+        "name" : "Large",
+        "code" : "L",
+        "price" : 200.0
+      },
+      "regular": null,
+      "small": null,
+      "description": "Nescafé is a brand with instant coffee made by the Vevey-based company Nestlé."
+    },
+    {
+      "name": "Lipton Tea",
+      "large": {
+        "name" : "Large",
+        "code" : "L",
+        "price" : 100.0
+      },
+      "regular": {
+        "name" : "Regular",
+        "code" : "R",
+        "price" : 75.0
+      },
+      "small":  {
+        "name" : "Small",
+        "code" : "S",
+        "price" : 50.0
+      },
+      "description": "Drink Positive with Lipton® tea products and discover the tasty and refreshing drinks from the world's leading tea brand."
+    }
+  ]
+}

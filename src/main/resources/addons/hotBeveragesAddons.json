@@ -1,0 +1,20 @@
+{
+  "hotBeveragesAddons": [
+    {
+      "name": "Sugar",
+      "price": 10.0
+    },
+    {
+      "name": "Honey",
+      "price": 75.0
+    },
+    {
+      "name": "Jaggery",
+      "price": 50.0
+    },
+    {
+      "name": "Chocolate powder",
+      "price": 100.0
+    }
+  ]
+}
