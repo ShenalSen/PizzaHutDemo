@@ -55,4 +55,48 @@ public class MenuItem {
         }
     }
 
+    // Main getters and setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public MenuCategory getCategory() { return category; }
+    public void setCategory(MenuCategory category) { this.category = category; }
+
+    public Map<String, SizeInfo> getSizes() { return sizes; }
+    public void setSizes(Map<String, SizeInfo> sizes) { this.sizes = sizes; }
+
+    // Business methods
+    public Double getPriceForSize(String sizeCode) {
+        SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+        return sizeInfo != null ? sizeInfo.getPrice() : null;
+    }
+
+    public SizeInfo getSizeInfo(String sizeCode) {
+        return sizes.get(sizeCode.toLowerCase());
+    }
+
+    public boolean isAvailableInSize(String sizeCode) {
+        SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+        return sizeInfo != null && sizeInfo.getPrice() != null;
+    }
+
+    public String getAvailableSizesDisplay() {
+        StringBuilder sb = new StringBuilder();
+        for (String sizeCode : category.getSizeCodes()) {
+            SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+            if (sizeInfo != null && sizeInfo.getPrice() != null) {
+                if (sb.length() > 0) sb.append(" | ");
+                sb.append(sizeCode).append(" ").append(sizeInfo.getPrice()).append(" LKR");
+            }
+        }
+        return sb.toString();
+    }
+
+
 }
