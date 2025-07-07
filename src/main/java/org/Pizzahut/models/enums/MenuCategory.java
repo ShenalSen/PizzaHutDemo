@@ -40,5 +40,21 @@ public enum MenuCategory {
         return sizeCodes.contains(sizeCode.toUpperCase());
     }
 
+    public String getJsonFileName() {
+        return switch (this) {
+            case PIZZA -> "pizzaMenuList.json";
+            case SOFT_DRINKS -> "softDrinksMenuList.json";
+            case HOT_BEVERAGES -> "hotBeveragesMenuList.json";
+            case CAKES -> "cakeMenuList.json";
+        };
+    }
 
+    public String getAddonFileName() {
+        return switch (this) {
+            case PIZZA -> "pizzaAddons.json";
+            case SOFT_DRINKS -> "softDrinksAddons.json";
+            case HOT_BEVERAGES -> "hotBeveragesAddons.json";
+            case CAKES -> "cakeAddons.json";
+        };
+    }
 }
