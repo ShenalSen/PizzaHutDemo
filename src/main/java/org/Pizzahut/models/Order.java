@@ -1,18 +1,22 @@
 package org.Pizzahut.models;
+
+import org.Pizzahut.models.enums.MenuCategory;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class Order {
     private List<OrderItem> orderItems;
     private double totalAmount;
 
-    
+    // Constructor
     public Order() {
         this.orderItems = new ArrayList<>();
         this.totalAmount = 0.0;
     }
 
-    
+    // Inner class to represent individual order items
     public static class OrderItem {
         private MenuItem menuItem;
         private String selectedSize;
@@ -41,7 +45,7 @@ public class Order {
             }
         }
 
-        
+        // Getters
         public MenuItem getMenuItem() { return menuItem; }
         public String getSelectedSize() { return selectedSize; }
         public String getSelectedSizeName() { return selectedSizeName; }
@@ -84,5 +88,35 @@ public class Order {
                 .mapToDouble(OrderItem::getItemTotal)
                 .sum();
     }
+
+    
+    public List<OrderItem> getOrderItems() { 
+        return orderItems; 
+    }
+    
+    public double getTotalAmount() { 
+        return totalAmount; 
+    }
+    
+    public int getItemCount() { 
+        return orderItems.size(); 
+    }
+    
+    public boolean isEmpty() { 
+        return orderItems.isEmpty(); 
+    }
+
+
+    public Map<MenuCategory, List<OrderItem>> getItemsByCategory() {
+        Map<MenuCategory, List<OrderItem>> categoryMap = new LinkedHashMap<>();
+        
+        for (OrderItem item : orderItems) {
+            MenuCategory category = item.getMenuItem().getCategory();
+            categoryMap.computeIfAbsent(category, k -> new ArrayList<>()).add(item);
+        }
+        
+        return categoryMap;
+    }
+
 
 }
