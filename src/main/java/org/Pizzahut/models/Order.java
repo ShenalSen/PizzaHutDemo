@@ -61,5 +61,31 @@ public class Order {
         public double getAddonTotal() { return addonTotal; }
         public double getItemTotal() { return itemTotal; }
 
-        
+        // Display methods
+        public String getDisplayName() {
+            return menuItem.getName() + " (" + selectedSizeName + ")";
+        }
+
+        public String getReceiptLine() {
+            return "#" + menuItem.getId() + " " + getDisplayName() + " - " + 
+                   String.format("%.2f LKR", itemTotal);
+        }
+
+        public String getDetailedReceiptLine() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("#").append(menuItem.getId()).append(" ")
+              .append(menuItem.getName()).append(" (").append(selectedSizeName).append(")")
+              .append(" - ").append(String.format("%.2f LKR", itemPrice)).append("\n");
+            
+            if (!addons.isEmpty()) {
+                sb.append("     Addons:\n");
+                for (Addon addon : addons) {
+                    sb.append("     ").append(addon.getReceiptFormat()).append("\n");
+                }
+                sb.append("     Item Total: ").append(String.format("%.2f LKR", itemTotal)).append("\n");
+            }
+            
+            return sb.toString();
+        }
+    }
 }
