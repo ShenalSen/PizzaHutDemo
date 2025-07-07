@@ -1,22 +1,20 @@
 package org.Pizzahut.models;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import org.Pizzahut.models.enums.MenuCategory;
+import java.util.ArrayList;
 
 
 public class Order {
     private List<OrderItem> orderItems;
     private double totalAmount;
 
-    // Constructor
+    
     public Order() {
         this.orderItems = new ArrayList<>();
         this.totalAmount = 0.0;
     }
 
-     public static class OrderItem {
+    
+    public static class OrderItem {
         private MenuItem menuItem;
         private String selectedSize;
         private String selectedSizeName;
@@ -35,19 +33,11 @@ public class Order {
             this.itemTotal = this.itemPrice;
         }
 
-        // Add addon 
+        // Add addon to this order item
         public void addAddon(Addon addon) {
             if (addon.isApplicableToCategory(menuItem.getCategory())) {
                 addons.add(addon);
                 addonTotal += addon.getPrice();
-                itemTotal = itemPrice + addonTotal;
-            }
-        }
-
-        // Remove addon
-        public void removeAddon(Addon addon) {
-            if (addons.remove(addon)) {
-                addonTotal -= addon.getPrice();
                 itemTotal = itemPrice + addonTotal;
             }
         }
@@ -60,32 +50,40 @@ public class Order {
         public List<Addon> getAddons() { return addons; }
         public double getAddonTotal() { return addonTotal; }
         public double getItemTotal() { return itemTotal; }
+    }
 
-        // Display methods
-        public String getDisplayName() {
-            return menuItem.getName() + " (" + selectedSizeName + ")";
+    // Order management methods
+    public void addItem(MenuItem menuItem, String selectedSize) {
+        OrderItem orderItem = new OrderItem(menuItem, selectedSize);
+        orderItems.add(orderItem);
+        recalculateTotal();
+    }
+
+    public void addItemWithAddons(MenuItem menuItem, String selectedSize, List<Addon> addons) {
+        OrderItem orderItem = new OrderItem(menuItem, selectedSize);
+        for (Addon addon : addons) {
+            orderItem.addAddon(addon);
         }
+        orderItems.add(orderItem);
+        recalculateTotal();
+    }
 
-        public String getReceiptLine() {
-            return "#" + menuItem.getId() + " " + getDisplayName() + " - " + 
-                   String.format("%.2f LKR", itemTotal);
-        }
+    public OrderItem getLastItem() {
+        return orderItems.isEmpty() ? null : orderItems.get(orderItems.size() - 1);
+    }
 
-        public String getDetailedReceiptLine() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("#").append(menuItem.getId()).append(" ")
-              .append(menuItem.getName()).append(" (").append(selectedSizeName).append(")")
-              .append(" - ").append(String.format("%.2f LKR", itemPrice)).append("\n");
-            
-            if (!addons.isEmpty()) {
-                sb.append("     Addons:\n");
-                for (Addon addon : addons) {
-                    sb.append("     ").append(addon.getReceiptFormat()).append("\n");
-                }
-                sb.append("     Item Total: ").append(String.format("%.2f LKR", itemTotal)).append("\n");
-            }
-            
-            return sb.toString();
+    public void addAddonToLastItem(Addon addon) {
+        OrderItem lastItem = getLastItem();
+        if (lastItem != null) {
+            lastItem.addAddon(addon);
+            recalculateTotal();
         }
     }
+
+    private void recalculateTotal() {
+        totalAmount = orderItems.stream()
+                .mapToDouble(OrderItem::getItemTotal)
+                .sum();
+    }
+
 }
