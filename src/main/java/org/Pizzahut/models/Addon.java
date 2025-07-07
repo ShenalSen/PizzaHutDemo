@@ -61,4 +61,31 @@ public class Addon {
         return this.category == targetCategory;
     }
 
+    // UI diplay methods
+    @Override
+    public String toString() {
+        return "#" + id + " " + name + " - " + getFormattedPrice();
+    }
+
+    public String getDisplayName() {
+        return name + " (+" + getFormattedPrice() + ")";
+    }
+
+    // For order receipt display
+    public String getReceiptFormat() {
+        return "- " + name + " (+" + getFormattedPrice() + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Addon addon = (Addon) obj;
+        return id == addon.id && category == addon.category;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id) + (category != null ? category.hashCode() : 0);
+    }
 }
