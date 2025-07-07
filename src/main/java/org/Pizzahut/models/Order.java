@@ -119,4 +119,48 @@ public class Order {
     }
 
 
+    public String generateReceipt() {
+        if (isEmpty()) {
+            return "No items in order.";
+        }
+
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("You have ordered #").append(getItemCount()).append(" number of items\n");
+        receipt.append("            Pizza Hut\n");
+        receipt.append("---------------------------------------------\n");
+
+        Map<MenuCategory, List<OrderItem>> itemsByCategory = getItemsByCategory();
+        
+        int itemNumber = 1;
+        for (Map.Entry<MenuCategory, List<OrderItem>> entry : itemsByCategory.entrySet()) {
+            receipt.append("[ ").append(entry.getKey().getDisplayName()).append(" ]\n");
+            
+            for (OrderItem item : entry.getValue()) {
+                receipt.append("#").append(itemNumber++).append(" ").append(item.getMenuItem().getName()).append("\n");
+                receipt.append("          - ").append(item.getSelectedSizeName()).append(" Size - ")
+                       .append(String.format("%.1f", item.getItemPrice())).append(" LKR\n");
+                
+                if (!item.getAddons().isEmpty()) {
+                    receipt.append("   Addons\n");
+                    for (Addon addon : item.getAddons()) {
+                        receipt.append("          - ").append(addon.getName()).append(" - ")
+                               .append(String.format("%.1f", addon.getPrice())).append(" LKR\n");
+                    }
+                }
+            }
+        }
+
+        receipt.append("\n        Total : ").append(String.format("%.1f", getTotalAmount())).append(" LKR\n");
+        receipt.append("---------------------------------------------\n");
+        receipt.append("        Thank You For Ordering\n");
+        receipt.append("---------------------------------------------\n");
+        receipt.append("Thank you for visiting Pizza Hut, See you next time\n");
+
+        return receipt.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Order [Items: " + getItemCount() + ", Total: " + String.format("%.1f LKR", totalAmount) + "]";
+    }
 }
