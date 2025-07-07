@@ -98,5 +98,34 @@ public class MenuItem {
         return sb.toString();
     }
 
+    // ui meths
+    @Override
+    public String toString() {
+        return "#" + id + " " + name + " - " + getAvailableSizesDisplay();
+    }
 
+    public String getDetailedView() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name : ").append(name).append("\n");
+        sb.append("Description : ").append(description).append("\n");
+        sb.append("Available Sizes : ");
+        
+        for (String sizeCode : category.getSizeCodes()) {
+            SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+            if (sizeInfo != null && sizeInfo.getPrice() != null) {
+                sb.append(sizeInfo.getName()).append(" | ");
+            }
+        }
+        sb.setLength(sb.length() - 3); // Remove last " | "
+        sb.append("\n");
+        
+        for (String sizeCode : category.getSizeCodes()) {
+            SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+            if (sizeInfo != null && sizeInfo.getPrice() != null) {
+                sb.append(sizeInfo.getName()).append(" Price : ").append(sizeInfo.getPrice()).append(" LKR\n");
+            }
+        }
+        
+        return sb.toString();
+    }
 }
