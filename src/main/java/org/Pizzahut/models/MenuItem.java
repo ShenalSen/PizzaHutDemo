@@ -73,23 +73,39 @@ public class MenuItem {
 
     // Business methods
     public Double getPriceForSize(String sizeCode) {
-        SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+        String sizeKey = getSizeKey(sizeCode);
+        SizeInfo sizeInfo = sizes.get(sizeKey);
         return sizeInfo != null ? sizeInfo.getPrice() : null;
     }
 
     public SizeInfo getSizeInfo(String sizeCode) {
-        return sizes.get(sizeCode.toLowerCase());
+        String sizeKey = getSizeKey(sizeCode);
+        return sizes.get(sizeKey);
     }
 
     public boolean isAvailableInSize(String sizeCode) {
-        SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+        String sizeKey = getSizeKey(sizeCode);
+        SizeInfo sizeInfo = sizes.get(sizeKey);
         return sizeInfo != null && sizeInfo.getPrice() != null;
+    }
+
+    private String getSizeKey(String sizeCode) {
+        return switch (sizeCode.toUpperCase()) {
+            case "L" -> "large";
+            case "M" -> "medium";
+            case "S" -> "small";
+            case "R" -> "regular";
+            case "F" -> "full";
+            case "H" -> "half";
+            default -> sizeCode.toLowerCase();
+        };
     }
 
     public String getAvailableSizesDisplay() {
         StringBuilder sb = new StringBuilder();
         for (String sizeCode : category.getSizeCodes()) {
-            SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+            String sizeKey = getSizeKey(sizeCode);
+            SizeInfo sizeInfo = sizes.get(sizeKey);
             if (sizeInfo != null && sizeInfo.getPrice() != null) {
                 if (sb.length() > 0) sb.append(" | ");
                 sb.append(sizeCode).append(" ").append(sizeInfo.getPrice()).append(" LKR");
@@ -110,17 +126,21 @@ public class MenuItem {
         sb.append("Description : ").append(description).append("\n");
         sb.append("Available Sizes : ");
         
+        boolean first = true;
         for (String sizeCode : category.getSizeCodes()) {
-            SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+            String sizeKey = getSizeKey(sizeCode);
+            SizeInfo sizeInfo = sizes.get(sizeKey);
             if (sizeInfo != null && sizeInfo.getPrice() != null) {
-                sb.append(sizeInfo.getName()).append(" | ");
+                if (!first) sb.append(" | ");
+                sb.append(sizeInfo.getName());
+                first = false;
             }
         }
-        sb.setLength(sb.length() - 3); // Remove last " | "
         sb.append("\n");
         
         for (String sizeCode : category.getSizeCodes()) {
-            SizeInfo sizeInfo = sizes.get(sizeCode.toLowerCase());
+            String sizeKey = getSizeKey(sizeCode);
+            SizeInfo sizeInfo = sizes.get(sizeKey);
             if (sizeInfo != null && sizeInfo.getPrice() != null) {
                 sb.append(sizeInfo.getName()).append(" Price : ").append(sizeInfo.getPrice()).append(" LKR\n");
             }
