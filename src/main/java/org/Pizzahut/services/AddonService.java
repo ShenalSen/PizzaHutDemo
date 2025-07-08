@@ -25,12 +25,12 @@ public class AddonService {
         }
         return instance;
     }
-
+    
     public List<Addon> getAddonsByCategory(MenuCategory category) {
         List<Addon> addons = new ArrayList<>();
         
         try {
-            
+            // Load JSON file based on category
             String fileName = "/addons/" + category.getAddonFileName();
             InputStream inputStream = getClass().getResourceAsStream(fileName);
             
@@ -63,7 +63,7 @@ public class AddonService {
         
         return addons;
     }
-
+    
     private Addon parseAddon(JsonObject addonJson, MenuCategory category, int id) {
         try {
             Addon addon = new Addon();
@@ -79,7 +79,6 @@ public class AddonService {
             return null;
         }
     }
-
     
     public Addon getAddonById(int id, MenuCategory category) {
         List<Addon> addons = getAddonsByCategory(category);
@@ -92,12 +91,12 @@ public class AddonService {
         
         return null;
     }
-
+    
     public boolean hasAddons(MenuCategory category) {
         List<Addon> addons = getAddonsByCategory(category);
         return !addons.isEmpty();
     }
-
+    
     public void displayAddons(MenuCategory category) {
         List<Addon> addons = getAddonsByCategory(category);
         
@@ -117,26 +116,7 @@ public class AddonService {
         System.out.println("\nPress [0] to skip addons");
         System.out.println("Enter addon numbers (comma separated):");
     }
-
-    public void displaySelectedAddons(List<Addon> selectedAddons) {
-        if (selectedAddons.isEmpty()) {
-            System.out.println("No addons selected.");
-            return;
-        }
-        
-        System.out.println("\nSelected Addons:");
-        for (Addon addon : selectedAddons) {
-            System.out.println("- " + addon.getDisplayName());
-        }
-        
-        double totalAddonPrice = selectedAddons.stream()
-                .mapToDouble(Addon::getPrice)
-                .sum();
-        
-        System.out.println("Total Addon Cost: " + String.format("%.1f LKR", totalAddonPrice));
-    }
-
-    // Add this method to the class
+    
     public List<Addon> parseAddonSelections(String input, MenuCategory category) {
         List<Addon> selectedAddons = new ArrayList<>();
         
@@ -164,5 +144,23 @@ public class AddonService {
         }
         
         return selectedAddons;
+    }
+    
+    public void displaySelectedAddons(List<Addon> selectedAddons) {
+        if (selectedAddons.isEmpty()) {
+            System.out.println("No addons selected.");
+            return;
+        }
+        
+        System.out.println("\nSelected Addons:");
+        for (Addon addon : selectedAddons) {
+            System.out.println("- " + addon.getDisplayName());
+        }
+        
+        double totalAddonPrice = selectedAddons.stream()
+                .mapToDouble(Addon::getPrice)
+                .sum();
+        
+        System.out.println("Total Addon Cost: " + String.format("%.1f LKR", totalAddonPrice));
     }
 }
