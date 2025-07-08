@@ -115,11 +115,16 @@ public class MenuController {
             MenuItem selectedItem = selectItem(selectedCategory);
             if (selectedItem == null) return; // User chose to go back
             
-            // TODO: Add size and addon selection
-            System.out.println("Selected item: " + selectedItem.getName());
+            // Step 3: Size Selection
+            String selectedSize = selectSize(selectedItem);
+            if (selectedSize == null) return; // User chose to go back
+            
+            // TODO: Add addon selection
+            System.out.println("Selected: " + selectedItem.getName() + " - " + 
+                              selectedCategory.getSizeNameByCode(selectedSize));
             System.out.println("Press any key to continue...");
             scanner.nextLine();
-            break; // For now, just test item selection
+            break; // For now, just test size selection
         }
     }
     
@@ -172,6 +177,42 @@ public class MenuController {
         System.out.println("Receipt generation (to be implemented)");
         System.out.println("Press any key to continue...");
         scanner.nextLine();
+    }
+    
+    // Add this new method:
+    private String selectSize(MenuItem item) {
+        while (true) {
+            System.out.println("\n" + "=".repeat(40));
+            System.out.println("           SELECT SIZE");
+            System.out.println("=".repeat(40));
+            System.out.println("Item: " + item.getName());
+            System.out.println("\nAvailable sizes:");
+            
+            MenuCategory category = item.getCategory();
+            for (String sizeCode : category.getSizeCodes()) {
+                if (item.isAvailableInSize(sizeCode)) {
+                    String sizeName = category.getSizeNameByCode(sizeCode);
+                    Double price = item.getPriceForSize(sizeCode);
+                    System.out.println("[" + sizeCode + "] " + sizeName + " - " + 
+                                     String.format("%.1f LKR", price));
+                }
+            }
+            
+            System.out.println("[0] Back to item selection");
+            System.out.print("\nEnter size code: ");
+            
+            String choice = scanner.nextLine().trim().toUpperCase();
+            
+            if (choice.equals("0")) {
+                return null; // Go back
+            }
+            
+            if (item.isAvailableInSize(choice)) {
+                return choice;
+            } else {
+                System.out.println("Invalid size. Please try again.");
+            }
+        }
     }
     
     // Keep existing selectCategory() method unchanged
