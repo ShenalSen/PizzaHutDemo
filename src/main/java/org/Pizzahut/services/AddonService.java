@@ -3,7 +3,13 @@ package org.Pizzahut.services;
 import org.Pizzahut.models.Addon;
 import org.Pizzahut.models.enums.MenuCategory;
 import com.google.gson.Gson;
-
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import java.io.InputStreamReader;
+import java.io.InputStream;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AddonService {
     private static AddonService instance;
@@ -19,4 +25,58 @@ public class AddonService {
         }
         return instance;
     }
-}    
+
+    public List<Addon> getAddonsByCategory(MenuCategory category) {
+        List<Addon> addons = new ArrayList<>();
+        
+        try {
+            // Load JSON file based on category
+            String fileName = "/addons/" + category.getAddonFileName();
+            InputStream inputStream = getClass().getResourceAsStream(fileName);
+            
+            if (inputStream == null) {
+                System.out.println("Could not find addon file: " + fileName);
+                return addons;
+            }
+            
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+            
+            // Get the addons array
+            JsonArray addonsArray = jsonObject.getAsJsonArray("addons");
+            
+            int id = 1;
+            for (JsonElement element : addonsArray) {
+                JsonObject addonJson = element.getAsJsonObject();
+                Addon addon = parseAddon(addonJson, category, id++);
+                if (addon != null) {
+                    addons.add(addon);
+                }
+            }
+            
+            reader.close();
+            
+        } catch (Exception e) {
+            System.out.println("Error loading addons for category: " + category.getDisplayName());
+            e.printStackTrace();
+        }
+        
+        return addons;
+    }
+
+    private Addon parseAddon(JsonObject addonJson, MenuCategory category, int id) {
+        try {
+            Addon addon = new Addon();
+            addon.setId(id);
+            addon.setName(addonJson.get("name").getAsString());
+            addon.setPrice(addonJson.get("price").getAsDouble());
+            addon.setCategory(category);
+            
+            return addon;
+            
+        } catch (Exception e) {
+            System.out.println("Error parsing addon: " + e.getMessage());
+            return null;
+        }
+    }
+}
