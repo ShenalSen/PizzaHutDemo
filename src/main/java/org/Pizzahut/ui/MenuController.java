@@ -32,7 +32,45 @@ public class MenuController {
     }
     
     private void showMainMenu() {
-        // TODO: Implement main menu
-        System.out.println("Main menu (to be implemented)");
+        while (true) {
+            System.out.println("\n" + "=".repeat(50));
+            System.out.println("                    MAIN MENU");
+            System.out.println("=".repeat(50));
+            System.out.println("[1] Pizza Menu");
+            System.out.println("[2] Soft Drinks Menu");
+            System.out.println("[3] Hot Beverages Menu");
+            System.out.println("[4] Cakes Menu");
+            System.out.println("[5] Order Items");
+            System.out.println("[x] Exit");
+            System.out.print("\nEnter your choice: ");
+            
+            String choice = scanner.nextLine().trim().toLowerCase();
+            
+            switch (choice) {
+                case "1" -> showCategoryMenu(MenuCategory.PIZZA);
+                case "2" -> showCategoryMenu(MenuCategory.SOFT_DRINKS);
+                case "3" -> showCategoryMenu(MenuCategory.HOT_BEVERAGES);
+                case "4" -> showCategoryMenu(MenuCategory.CAKES);
+                case "5" -> startOrderProcess();
+                case "x" -> {
+                    System.out.println("Thank you for visiting Pizza Hut!");
+                    return;
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+    
+    
+    private void showCategoryMenu(MenuCategory category) {
+        System.out.println("Showing " + category.getDisplayName() + " menu (to be implemented)");
+        System.out.println("Press any key to continue...");
+        scanner.nextLine();
+    }
+    
+    private void startOrderProcess() {
+        System.out.println("Order process (to be implemented)");
+        System.out.println("Press any key to continue...");
+        scanner.nextLine();
     }
 }
