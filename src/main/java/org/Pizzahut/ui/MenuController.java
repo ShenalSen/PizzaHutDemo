@@ -111,14 +111,70 @@ public class MenuController {
             MenuCategory selectedCategory = selectCategory();
             if (selectedCategory == null) return; // User chose to exit
             
-            // TODO: Add item, size, and addon selection
-            System.out.println("Selected category: " + selectedCategory.getDisplayName());
+            // Step 2: Item Selection
+            MenuItem selectedItem = selectItem(selectedCategory);
+            if (selectedItem == null) return; // User chose to go back
+            
+            // TODO: Add size and addon selection
+            System.out.println("Selected item: " + selectedItem.getName());
             System.out.println("Press any key to continue...");
             scanner.nextLine();
-            break; // For now, just test category selection
+            break; // For now, just test item selection
         }
     }
     
+    // Add this new method:
+    private MenuItem selectItem(MenuCategory category) {
+        while (true) {
+            List<MenuItem> items = menuService.getAvailableItems(category);
+            
+            System.out.println("\n" + "=".repeat(50));
+            System.out.println("           " + category.getDisplayName().toUpperCase() + " MENU");
+            System.out.println("=".repeat(50));
+            
+            for (MenuItem item : items) {
+                System.out.println(item.toString());
+            }
+            
+            System.out.println("\n[0] Back to category selection");
+            System.out.println("[E] Complete order with current items");
+            System.out.print("\nEnter item number: ");
+            
+            String choice = scanner.nextLine().trim().toUpperCase();
+            
+            if (choice.equals("0")) {
+                return null; // Go back
+            }
+            
+            if (choice.equals("E") && !currentOrder.isEmpty()) {
+                displayFinalReceipt();
+                return null;
+            }
+            
+            try {
+                int itemId = Integer.parseInt(choice);
+                MenuItem item = menuService.getItemById(itemId, category);
+                
+                if (item != null) {
+                    return item;
+                } else {
+                    System.out.println("Invalid item number. Please try again.");
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+        }
+    }
+    
+    // Add placeholder for receipt
+    private void displayFinalReceipt() {
+        System.out.println("Receipt generation (to be implemented)");
+        System.out.println("Press any key to continue...");
+        scanner.nextLine();
+    }
+    
+    // Keep existing selectCategory() method unchanged
     private MenuCategory selectCategory() {
         while (true) {
             System.out.println("\n" + "=".repeat(40));
