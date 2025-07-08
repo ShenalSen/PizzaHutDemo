@@ -97,13 +97,12 @@ public class MenuService {
         for (String sizeCode : category.getSizeCodes()) {
             String sizeKey = getSizeKey(sizeCode);
             
-            if (itemJson.has(sizeKey)) {
+            if (itemJson.has(sizeKey) && !itemJson.get(sizeKey).isJsonNull()) {
                 JsonObject sizeJson = itemJson.getAsJsonObject(sizeKey);
                 
                 MenuItem.SizeInfo sizeInfo = new MenuItem.SizeInfo();
                 sizeInfo.setName(sizeJson.get("name").getAsString());
                 sizeInfo.setCode(sizeJson.get("code").getAsString());
-                
                 
                 if (sizeJson.has("price") && !sizeJson.get("price").isJsonNull()) {
                     sizeInfo.setPrice(sizeJson.get("price").getAsDouble());
@@ -113,6 +112,7 @@ public class MenuService {
                 
                 menuItem.getSizes().put(sizeKey, sizeInfo);
             }
+            // If the size is null or doesn't exist, we simply skip it
         }
     }
     
