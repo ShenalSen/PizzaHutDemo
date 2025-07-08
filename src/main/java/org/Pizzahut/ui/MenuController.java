@@ -99,8 +99,48 @@ public class MenuController {
     }
     
     private void startOrderProcess() {
-        System.out.println("Order process (to be implemented)");
-        System.out.println("Press any key to continue...");
-        scanner.nextLine();
+        currentOrder = new Order(); // Reset order
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("                 START ORDERING");
+        System.out.println("=".repeat(50));
+        
+        for (int itemCount = 1; itemCount <= 3; itemCount++) {
+            System.out.println("\nSelecting item #" + itemCount);
+            
+            // Step 1: Category Selection
+            MenuCategory selectedCategory = selectCategory();
+            if (selectedCategory == null) return; // User chose to exit
+            
+            // TODO: Add item, size, and addon selection
+            System.out.println("Selected category: " + selectedCategory.getDisplayName());
+            System.out.println("Press any key to continue...");
+            scanner.nextLine();
+            break; // For now, just test category selection
+        }
+    }
+    
+    private MenuCategory selectCategory() {
+        while (true) {
+            System.out.println("\n" + "=".repeat(40));
+            System.out.println("           SELECT CATEGORY");
+            System.out.println("=".repeat(40));
+            System.out.println("[1] Pizza");
+            System.out.println("[2] Soft Drinks");
+            System.out.println("[3] Hot Beverages");
+            System.out.println("[4] Cakes");
+            System.out.println("[0] Back to Main Menu");
+            System.out.print("\nEnter category number: ");
+            
+            String choice = scanner.nextLine().trim();
+            
+            switch (choice) {
+                case "1" -> { return MenuCategory.PIZZA; }
+                case "2" -> { return MenuCategory.SOFT_DRINKS; }
+                case "3" -> { return MenuCategory.HOT_BEVERAGES; }
+                case "4" -> { return MenuCategory.CAKES; }
+                case "0" -> { return null; }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
     }
 }
