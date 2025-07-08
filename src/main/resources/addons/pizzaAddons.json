@@ -1,5 +1,5 @@
 {
-  "pizzaAddons": [
+  "addons": [
     {
       "name": "Cheese",
       "price": 100.0
