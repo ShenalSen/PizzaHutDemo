@@ -119,16 +119,32 @@ public class MenuController {
             String selectedSize = selectSize(selectedItem);
             if (selectedSize == null) return; // User chose to go back
             
-            // TODO: Add addon selection
-            System.out.println("Selected: " + selectedItem.getName() + " - " + 
-                              selectedCategory.getSizeNameByCode(selectedSize));
-            System.out.println("Press any key to continue...");
-            scanner.nextLine();
-            break; // For now, just test size selection
+            // Step 4: Addon Selection
+            List<Addon> selectedAddons = selectAddons(selectedCategory);
+            
+            // Add item to order
+            currentOrder.addItem(selectedItem, selectedSize);
+            for (Addon addon : selectedAddons) {
+                currentOrder.addAddonToLastItem(addon);
+            }
+            
+            System.out.println("\nItem added to order!");
+            
+            // Ask if user wants to add more items
+            if (itemCount < 3) {
+                System.out.print("Do you want to add another item? (y/n): ");
+                String addMore = scanner.nextLine().trim().toLowerCase();
+                if (!addMore.equals("y")) {
+                    break;
+                }
+            }
         }
+        
+        // Generate and display receipt
+        displayFinalReceipt();
     }
     
-    // Add this new method:
+    
     private MenuItem selectItem(MenuCategory category) {
         while (true) {
             List<MenuItem> items = menuService.getAvailableItems(category);
@@ -172,11 +188,37 @@ public class MenuController {
         }
     }
     
-    // Add placeholder for receipt
+    // Add this new method before selectCategory():
+    private List<Addon> selectAddons(MenuCategory category) {
+        if (!addonService.hasAddons(category)) {
+            System.out.println("No addons available for this category.");
+            return List.of(); // Return empty list
+        }
+        
+        addonService.displayAddons(category);
+        System.out.print("Your selection: ");
+        
+        String input = scanner.nextLine().trim();
+        List<Addon> selectedAddons = addonService.parseAddonSelections(input, category);
+        
+        if (!selectedAddons.isEmpty()) {
+            addonService.displaySelectedAddons(selectedAddons);
+        }
+        
+        return selectedAddons;
+    }
+    
+    // Replace the placeholder displayFinalReceipt method:
     private void displayFinalReceipt() {
-        System.out.println("Receipt generation (to be implemented)");
-        System.out.println("Press any key to continue...");
-        scanner.nextLine();
+        if (currentOrder.isEmpty()) {
+            System.out.println("No items in order.");
+            return;
+        }
+        
+        System.out.println("\n" + currentOrder.generateReceipt());
+        
+        // Reset for next order
+        currentOrder = new Order();
     }
     
     // Add this new method:
