@@ -31,7 +31,7 @@ public class MenuService {
         List<MenuItem> menuItems = new ArrayList<>();
         
         try {
-            // Load JSON file based on category
+            
             String fileName = "/menus/" + category.getJsonFileName();
             InputStream inputStream = getClass().getResourceAsStream(fileName);
             
@@ -43,7 +43,7 @@ public class MenuService {
             InputStreamReader reader = new InputStreamReader(inputStream);
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
             
-            // Get the appropriate array based on category
+            
             String arrayKey = getArrayKey(category);
             JsonArray itemsArray = jsonObject.getAsJsonArray(arrayKey);
             
@@ -83,7 +83,6 @@ public class MenuService {
             menuItem.setDescription(itemJson.get("description").getAsString());
             menuItem.setCategory(category);
             
-            // Parse sizes based on category
             parseSizes(itemJson, menuItem, category);
             
             return menuItem;
@@ -105,7 +104,7 @@ public class MenuService {
                 sizeInfo.setName(sizeJson.get("name").getAsString());
                 sizeInfo.setCode(sizeJson.get("code").getAsString());
                 
-                // Handle null prices
+                
                 if (sizeJson.has("price") && !sizeJson.get("price").isJsonNull()) {
                     sizeInfo.setPrice(sizeJson.get("price").getAsDouble());
                 } else {
