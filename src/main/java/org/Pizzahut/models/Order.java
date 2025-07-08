@@ -107,6 +107,7 @@ public class Order {
     }
 
 
+    @SuppressWarnings("unused")
     public Map<MenuCategory, List<OrderItem>> getItemsByCategory() {
         Map<MenuCategory, List<OrderItem>> categoryMap = new LinkedHashMap<>();
         
