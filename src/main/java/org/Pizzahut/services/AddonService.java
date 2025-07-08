@@ -97,4 +97,42 @@ public class AddonService {
         List<Addon> addons = getAddonsByCategory(category);
         return !addons.isEmpty();
     }
+
+    public void displayAddons(MenuCategory category) {
+        List<Addon> addons = getAddonsByCategory(category);
+        
+        System.out.println("\n" + "=".repeat(40));
+        System.out.println("        " + category.getDisplayName().toUpperCase() + " ADDONS");
+        System.out.println("=".repeat(40));
+        
+        if (addons.isEmpty()) {
+            System.out.println("No addons available for this category.");
+            return;
+        }
+        
+        for (Addon addon : addons) {
+            System.out.println(addon.toString());
+        }
+        
+        System.out.println("\nPress [0] to skip addons");
+        System.out.println("Enter addon numbers (comma separated):");
+    }
+
+    public void displaySelectedAddons(List<Addon> selectedAddons) {
+        if (selectedAddons.isEmpty()) {
+            System.out.println("No addons selected.");
+            return;
+        }
+        
+        System.out.println("\nSelected Addons:");
+        for (Addon addon : selectedAddons) {
+            System.out.println("- " + addon.getDisplayName());
+        }
+        
+        double totalAddonPrice = selectedAddons.stream()
+                .mapToDouble(Addon::getPrice)
+                .sum();
+        
+        System.out.println("Total Addon Cost: " + String.format("%.1f LKR", totalAddonPrice));
+    }
 }
