@@ -63,7 +63,37 @@ public class MenuController {
     
     
     private void showCategoryMenu(MenuCategory category) {
-        System.out.println("Showing " + category.getDisplayName() + " menu (to be implemented)");
+        while (true) {
+            menuService.displayMenu(category);
+            System.out.print("\nEnter your choice: ");
+            
+            String choice = scanner.nextLine().trim();
+            
+            if (choice.equals("0")) {
+                return; // Go back to main menu
+            }
+            
+            try {
+                int itemId = Integer.parseInt(choice);
+                MenuItem item = menuService.getItemById(itemId, category);
+                
+                if (item != null) {
+                    showItemDetails(item);
+                } else {
+                    System.out.println("Invalid item number. Please try again.");
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+        }
+    }
+    
+    private void showItemDetails(MenuItem item) {
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("                 ITEM DETAILS");
+        System.out.println("=".repeat(60));
+        System.out.println(item.getDetailedView());
         System.out.println("Press any key to continue...");
         scanner.nextLine();
     }
