@@ -30,7 +30,7 @@ public class AddonService {
         List<Addon> addons = new ArrayList<>();
         
         try {
-            // Load JSON file based on category
+            
             String fileName = "/addons/" + category.getAddonFileName();
             InputStream inputStream = getClass().getResourceAsStream(fileName);
             
@@ -78,5 +78,23 @@ public class AddonService {
             System.out.println("Error parsing addon: " + e.getMessage());
             return null;
         }
+    }
+
+    
+    public Addon getAddonById(int id, MenuCategory category) {
+        List<Addon> addons = getAddonsByCategory(category);
+        
+        for (Addon addon : addons) {
+            if (addon.getId() == id) {
+                return addon;
+            }
+        }
+        
+        return null;
+    }
+
+    public boolean hasAddons(MenuCategory category) {
+        List<Addon> addons = getAddonsByCategory(category);
+        return !addons.isEmpty();
     }
 }
