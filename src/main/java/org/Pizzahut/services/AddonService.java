@@ -135,4 +135,34 @@ public class AddonService {
         
         System.out.println("Total Addon Cost: " + String.format("%.1f LKR", totalAddonPrice));
     }
+
+    // Add this method to the class
+    public List<Addon> parseAddonSelections(String input, MenuCategory category) {
+        List<Addon> selectedAddons = new ArrayList<>();
+        
+        if (input == null || input.trim().isEmpty() || input.trim().equals("0")) {
+            return selectedAddons; // Return empty list for no addons
+        }
+        
+        try {
+            String[] addonIds = input.split(",");
+            List<Addon> availableAddons = getAddonsByCategory(category);
+            
+            for (String idStr : addonIds) {
+                int id = Integer.parseInt(idStr.trim());
+                
+                for (Addon addon : availableAddons) {
+                    if (addon.getId() == id) {
+                        selectedAddons.add(addon);
+                        break;
+                    }
+                }
+            }
+            
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid addon selection format. Please use numbers separated by commas.");
+        }
+        
+        return selectedAddons;
+    }
 }
