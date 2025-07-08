@@ -61,7 +61,6 @@ public class MenuController {
         }
     }
     
-    
     private void showCategoryMenu(MenuCategory category) {
         while (true) {
             menuService.displayMenu(category);
@@ -144,6 +143,30 @@ public class MenuController {
         displayFinalReceipt();
     }
     
+    private MenuCategory selectCategory() {
+        while (true) {
+            System.out.println("\n" + "=".repeat(40));
+            System.out.println("           SELECT CATEGORY");
+            System.out.println("=".repeat(40));
+            System.out.println("[1] Pizza");
+            System.out.println("[2] Soft Drinks");
+            System.out.println("[3] Hot Beverages");
+            System.out.println("[4] Cakes");
+            System.out.println("[0] Back to Main Menu");
+            System.out.print("\nEnter category number: ");
+            
+            String choice = scanner.nextLine().trim();
+            
+            switch (choice) {
+                case "1" -> { return MenuCategory.PIZZA; }
+                case "2" -> { return MenuCategory.SOFT_DRINKS; }
+                case "3" -> { return MenuCategory.HOT_BEVERAGES; }
+                case "4" -> { return MenuCategory.CAKES; }
+                case "0" -> { return null; }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
     
     private MenuItem selectItem(MenuCategory category) {
         while (true) {
@@ -188,40 +211,6 @@ public class MenuController {
         }
     }
     
-    // Add this new method before selectCategory():
-    private List<Addon> selectAddons(MenuCategory category) {
-        if (!addonService.hasAddons(category)) {
-            System.out.println("No addons available for this category.");
-            return List.of(); // Return empty list
-        }
-        
-        addonService.displayAddons(category);
-        System.out.print("Your selection: ");
-        
-        String input = scanner.nextLine().trim();
-        List<Addon> selectedAddons = addonService.parseAddonSelections(input, category);
-        
-        if (!selectedAddons.isEmpty()) {
-            addonService.displaySelectedAddons(selectedAddons);
-        }
-        
-        return selectedAddons;
-    }
-    
-    // Replace the placeholder displayFinalReceipt method:
-    private void displayFinalReceipt() {
-        if (currentOrder.isEmpty()) {
-            System.out.println("No items in order.");
-            return;
-        }
-        
-        System.out.println("\n" + currentOrder.generateReceipt());
-        
-        // Reset for next order
-        currentOrder = new Order();
-    }
-    
-    // Add this new method:
     private String selectSize(MenuItem item) {
         while (true) {
             System.out.println("\n" + "=".repeat(40));
@@ -257,29 +246,34 @@ public class MenuController {
         }
     }
     
-    // Keep existing selectCategory() method unchanged
-    private MenuCategory selectCategory() {
-        while (true) {
-            System.out.println("\n" + "=".repeat(40));
-            System.out.println("           SELECT CATEGORY");
-            System.out.println("=".repeat(40));
-            System.out.println("[1] Pizza");
-            System.out.println("[2] Soft Drinks");
-            System.out.println("[3] Hot Beverages");
-            System.out.println("[4] Cakes");
-            System.out.println("[0] Back to Main Menu");
-            System.out.print("\nEnter category number: ");
-            
-            String choice = scanner.nextLine().trim();
-            
-            switch (choice) {
-                case "1" -> { return MenuCategory.PIZZA; }
-                case "2" -> { return MenuCategory.SOFT_DRINKS; }
-                case "3" -> { return MenuCategory.HOT_BEVERAGES; }
-                case "4" -> { return MenuCategory.CAKES; }
-                case "0" -> { return null; }
-                default -> System.out.println("Invalid choice. Please try again.");
-            }
+    private List<Addon> selectAddons(MenuCategory category) {
+        if (!addonService.hasAddons(category)) {
+            System.out.println("No addons available for this category.");
+            return List.of(); // Return empty list
         }
+        
+        addonService.displayAddons(category);
+        System.out.print("Your selection: ");
+        
+        String input = scanner.nextLine().trim();
+        List<Addon> selectedAddons = addonService.parseAddonSelections(input, category);
+        
+        if (!selectedAddons.isEmpty()) {
+            addonService.displaySelectedAddons(selectedAddons);
+        }
+        
+        return selectedAddons;
+    }
+    
+    private void displayFinalReceipt() {
+        if (currentOrder.isEmpty()) {
+            System.out.println("No items in order.");
+            return;
+        }
+        
+        System.out.println("\n" + currentOrder.generateReceipt());
+        
+        // Reset for next order
+        currentOrder = new Order();
     }
 }
