@@ -26,9 +26,12 @@ public class MenuController {
     }
     
     private void displayWelcome() {
-        System.out.println("Welcome to PizzaHut!");
+        System.out.println("""
+            ===================================
+             Welcome to PizzaHut App by Shenal!
+            ===================================
+            """);
         System.out.println("\nCheck out our new items!");
-        System.out.println("Password : XU0zA5yt19");
     }
     
     private void showMainMenu() {
