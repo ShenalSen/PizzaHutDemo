@@ -112,7 +112,7 @@ public class MenuService {
                 
                 menuItem.getSizes().put(sizeKey, sizeInfo);
             }
-            // If the size is null or doesn't exist, we simply skip it
+            
         }
     }
     

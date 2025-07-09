@@ -11,12 +11,12 @@ public class MenuItem {
     private MenuCategory category;
     private Map<String, SizeInfo> sizes;
 
-    // Default constructor for JSON parsing
+    
     public MenuItem() {
         this.sizes = new HashMap<>();
     }
 
-    // Constructor
+    
     public MenuItem(int id, String name, String description, MenuCategory category) {
         this.id = id;
         this.name = name;
@@ -25,7 +25,7 @@ public class MenuItem {
         this.sizes = new HashMap<>();
     }
 
-    // Inner class to match your JSON structure
+    
     public static class SizeInfo {
         private String name;
         private String code;
@@ -39,7 +39,7 @@ public class MenuItem {
             this.price = price;
         }
 
-        // Getters and setters
+        
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }
         
@@ -55,7 +55,7 @@ public class MenuItem {
         }
     }
 
-    // Main getters and setters
+    
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -71,7 +71,7 @@ public class MenuItem {
     public Map<String, SizeInfo> getSizes() { return sizes; }
     public void setSizes(Map<String, SizeInfo> sizes) { this.sizes = sizes; }
 
-    // Business methods
+    
     public Double getPriceForSize(String sizeCode) {
         String sizeKey = getSizeKey(sizeCode);
         SizeInfo sizeInfo = sizes.get(sizeKey);

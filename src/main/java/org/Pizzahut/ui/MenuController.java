@@ -139,7 +139,7 @@ public class MenuController {
             }
         }
         
-        // Generate and display receipt
+        
         displayFinalReceipt();
     }
     

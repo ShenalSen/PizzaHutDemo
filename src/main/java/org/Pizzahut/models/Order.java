@@ -10,13 +10,13 @@ public class Order {
     private List<OrderItem> orderItems;
     private double totalAmount;
 
-    // Constructor
+    
     public Order() {
         this.orderItems = new ArrayList<>();
         this.totalAmount = 0.0;
     }
 
-    // Inner class to represent individual order items
+    
     public static class OrderItem {
         private MenuItem menuItem;
         private String selectedSize;
@@ -36,7 +36,7 @@ public class Order {
             this.itemTotal = this.itemPrice;
         }
 
-        // Add addon to this order item
+        
         public void addAddon(Addon addon) {
             if (addon.isApplicableToCategory(menuItem.getCategory())) {
                 addons.add(addon);
@@ -45,7 +45,7 @@ public class Order {
             }
         }
 
-        // Getters
+    
         public MenuItem getMenuItem() { return menuItem; }
         public String getSelectedSize() { return selectedSize; }
         public String getSelectedSizeName() { return selectedSizeName; }
@@ -55,7 +55,7 @@ public class Order {
         public double getItemTotal() { return itemTotal; }
     }
 
-    // Order management methods
+
     public void addItem(MenuItem menuItem, String selectedSize) {
         OrderItem orderItem = new OrderItem(menuItem, selectedSize);
         orderItems.add(orderItem);
