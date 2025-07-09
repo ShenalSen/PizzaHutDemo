@@ -134,10 +134,19 @@ public class MenuController {
             
             // Ask if user wants to add more items
             if (itemCount < 3) {
-                System.out.print("Do you want to add another item? (y/n): ");
-                String addMore = scanner.nextLine().trim().toLowerCase();
-                if (!addMore.equals("y")) {
-                    break;
+                while (true) {
+                    System.out.print("Do you want to add another item? (y/n): ");
+                    String addMore = scanner.nextLine().trim().toLowerCase();
+                    
+                    if (addMore.equals("y")) {
+                        break; 
+                    } else if (addMore.equals("n")) {
+                        
+                        displayFinalReceipt();
+                        return;
+                    } else {
+                        System.out.println("Invalid input. Please enter 'y' for yes or 'n' for no.");
+                    }
                 }
             }
         }
